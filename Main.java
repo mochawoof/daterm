@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 class Main {
     private static JFrame f;
+    private static JTextArea term;
     public static void main(String[] args) {
         JFrame mf = new JFrame("Daterm");
         
@@ -32,13 +33,16 @@ class Main {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setIconImage(Res.getAsImage("icon.png"));
         
-        JComponent p = new JComponent() {
-            public void paintComponent(Graphics g) {
-                g.setColor(Color.BLACK);
-                g.fillRect(0, 0, getWidth(), getHeight());
-            }
-        };
-        f.setContentPane(p);
+        // Terminal
+        if (term == null) {
+            term = new JTextArea();
+            term.setBackground(Color.BLACK);
+            term.setForeground(Color.WHITE);
+            term.setCaretColor(term.getForeground());
+            term.setLineWrap(true);
+        }
+        f.setContentPane(term);
+        term.requestFocus();
         
         JMenuBar mb = new JMenuBar();
         f.setJMenuBar(mb);
